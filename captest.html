@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- This is a test of reCaptcha version 3 using ajax
+        The javascript grecaptcha function changes uses the public key to get a response from google
+        ajax then send the response key to captest.php in which the response from google determines if
+        the user using the site is a bot or not depending on the users interactions with the site.
+By David Hobbs-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <!-- this connects to google recaptcha service, put your site code at the end of render= -->
+    <script src="https://www.google.com/recaptcha/api.js?render="></script>
+</head>
+<body>
+  <div class="message"></div>
+    <form id="capform" method="post">
+        <input type="text" id="name" name="name"><br>
+        <input type="hidden" id="g-recaptcha-response"><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <!--This function grabs the g-recaptcha-response input and changes the token based on your site key
+        The new value is the one that you need to pass along to the php page or via AJAX to the php page-->
+    <script>
+        grecaptcha.ready(function() {
+            grecaptcha.execute('6Lf8ub8UAAAAAG9c5wxDV993apbq_TE8d3ansby2', {action: 'homepage'}).then(function(token) {
+            document.getElementById('g-recaptcha-response').value=token;
+            });
+        });
+    </script>
+
+</body>
+<script src="captest.js"></script>
+</html>
